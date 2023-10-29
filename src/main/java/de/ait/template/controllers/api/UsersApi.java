@@ -50,6 +50,9 @@ public interface UsersApi {
     @PostMapping("/register")
     UserDto register(@RequestBody @Valid NewUserDto newUser);
 
+    @GetMapping("/confirm/{confirm-code}")
+    UserDto getConfirmation(@PathVariable("confirm-code") String confirmCode);
+
     @GetMapping("/profile")
     UserDto getProfile(@Parameter(hidden = true) @AuthenticationPrincipal AuthenticatedUser user);
 

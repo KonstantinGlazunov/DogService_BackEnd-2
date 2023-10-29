@@ -44,6 +44,8 @@ public class UsersIntegrationTest {
             mockMvc.perform(post("/api/users/register")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("{\n" +
+                            "  \"firstName\": \"Marsel\",\n" +
+                            "  \"lastName\": \"Sidikov\",\n" +
                             "  \"email\": \"sidikov.marsel@gmail.com\",\n" +
                             "  \"password\": \"Qwerty007!\"\n" +
                             "}"))
@@ -57,6 +59,8 @@ public class UsersIntegrationTest {
             mockMvc.perform(post("/api/users/register")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("{\n" +
+                                    "  \"firstName\": \"Marsel\",\n" +
+                                    "  \"lastName\": \"Sidikov\",\n" +
                                     "  \"email\": \"sidikov.marselgmail.com\",\n" +
                                     "  \"password\": \"Qwerty007!\"\n" +
                                     "}"))
@@ -70,6 +74,8 @@ public class UsersIntegrationTest {
             mockMvc.perform(post("/api/users/register")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("{\n" +
+                                    "  \"firstName\": \"Marsel\",\n" +
+                                    "  \"lastName\": \"Sidikov\",\n" +
                                     "  \"email\": \"sidikov.marsel@gmail.com\",\n" +
                                     "  \"password\": \"Qwerty007!\"\n" +
                                     "}"))

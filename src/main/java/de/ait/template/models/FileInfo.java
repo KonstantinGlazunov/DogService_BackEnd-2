@@ -5,60 +5,28 @@ import org.hibernate.proxy.HibernateProxy;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
 
 /**
- * 9/27/2023
- * education-center
+ * 10/25/2023
+ * OnlineShop
  *
  * @author Marsel Sidikov (AIT TR)
  */
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
-@Table(name = "account")
-public class User {
-
-    public enum Role {
-        ADMIN, MANAGER, USER
-    }
-
-    public enum State {
-        NOT_CONFIRMED, CONFIRMED, DELETED, BANNED
-    }
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class FileInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 20)
-    private String firstName;
-
-    @Column(length = 20)
-    private String lastName;
-
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Column(nullable = false)
-    private String hashPassword;
-
-    @Column(nullable = false)
-    @Enumerated(value = EnumType.STRING)
-    private Role role;
-
-    @Column(nullable = false)
-    @Enumerated(value = EnumType.STRING)
-    private State state;
-
-    @OneToMany(mappedBy = "user")
-    private Set<ConfirmationCode> codes;
-
-    private String photoLink;
+    @Column(length = 1000)
+    private String link;
 
     @Override
     public final boolean equals(Object o) {
@@ -67,8 +35,8 @@ public class User {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        User user = (User) o;
-        return getId() != null && Objects.equals(getId(), user.getId());
+        FileInfo fileInfo = (FileInfo) o;
+        return getId() != null && Objects.equals(getId(), fileInfo.getId());
     }
 
     @Override

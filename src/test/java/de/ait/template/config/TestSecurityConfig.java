@@ -36,12 +36,14 @@ public class TestSecurityConfig {
                             .id(1L)
                             .email(MOCK_USER)
                             .role(User.Role.USER)
+                            .state(User.State.CONFIRMED)
                             .build());
                 } else if (username.equals(MOCK_ADMIN)) {
                     return new AuthenticatedUser(User.builder()
                             .id(1L)
                             .email(MOCK_ADMIN)
                             .role(User.Role.ADMIN)
+                            .state(User.State.CONFIRMED)
                             .build());
                 } else throw new UsernameNotFoundException("User not found");
             }

@@ -2,6 +2,7 @@ package de.ait.template.controllers;
 
 import de.ait.template.controllers.api.UsersApi;
 import de.ait.template.dto.NewUserDto;
+import de.ait.template.dto.StandardResponseDto;
 import de.ait.template.dto.UserDto;
 import de.ait.template.security.details.AuthenticatedUser;
 import de.ait.template.services.UsersService;
@@ -24,6 +25,11 @@ public class UsersController implements UsersApi {
     @Override
     public UserDto register(NewUserDto newUser) {
         return usersService.register(newUser);
+    }
+
+    @Override
+    public UserDto getConfirmation(String confirmCode) {
+        return usersService.confirm(confirmCode);
     }
 
     @Override
