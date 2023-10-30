@@ -18,12 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/**
- * 9/27/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @SpringBootTest(classes = TestSecurityConfig.class)
 @AutoConfigureMockMvc
 @DisplayName("Endpoint /users is works:")
@@ -44,6 +39,8 @@ public class UsersIntegrationTest {
             mockMvc.perform(post("/api/users/register")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("{\n" +
+                            "  \"firstName\": \"Marsel\",\n" +
+                            "  \"lastName\": \"Sidikov\",\n" +
                             "  \"email\": \"sidikov.marsel@gmail.com\",\n" +
                             "  \"password\": \"Qwerty007!\"\n" +
                             "}"))
@@ -57,6 +54,8 @@ public class UsersIntegrationTest {
             mockMvc.perform(post("/api/users/register")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("{\n" +
+                                    "  \"firstName\": \"Marsel\",\n" +
+                                    "  \"lastName\": \"Sidikov\",\n" +
                                     "  \"email\": \"sidikov.marselgmail.com\",\n" +
                                     "  \"password\": \"Qwerty007!\"\n" +
                                     "}"))
@@ -70,6 +69,8 @@ public class UsersIntegrationTest {
             mockMvc.perform(post("/api/users/register")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("{\n" +
+                                    "  \"firstName\": \"Marsel\",\n" +
+                                    "  \"lastName\": \"Sidikov\",\n" +
                                     "  \"email\": \"sidikov.marsel@gmail.com\",\n" +
                                     "  \"password\": \"Qwerty007!\"\n" +
                                     "}"))

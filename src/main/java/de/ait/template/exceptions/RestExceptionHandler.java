@@ -5,12 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-/**
- * 9/25/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @ControllerAdvice
 public class RestExceptionHandler {
 

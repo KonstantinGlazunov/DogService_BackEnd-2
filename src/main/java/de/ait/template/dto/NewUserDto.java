@@ -10,12 +10,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-/**
- * 9/27/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
 @Data
 @Builder
 @AllArgsConstructor
@@ -32,4 +26,12 @@ public class NewUserDto {
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$")
     @Schema(description = "Пароль пользователя", example = "Qwerty007!")
     private String password;
+
+    @NotNull
+    @Schema(description = "Имя пользователя", example = "Marsel")
+    private String firstName;
+
+    @NotNull
+    @Schema(description = "Фамилия пользователя", example = "Sidikov")
+    private String lastName;
 }

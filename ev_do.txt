@@ -1,0 +1,12 @@
+DB_HOST=${shopdb.HOSTNAME}
+DB_PORT=${shopdb.PORT}
+DB_NAME=${shopdb.DATABASE}
+DB_USERNAME=${shopdb.USERNAME}
+DB_PASSWORD=${shopdb.PASSWORD}
+base_url=${_self.PUBLIC_URL}
+s3_accessKey=
+s3_endpoint=
+s3_region=
+s3_secretKey=
+spring_mail_password=
+spring_mail_username=

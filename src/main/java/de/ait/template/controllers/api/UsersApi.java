@@ -19,12 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-/**
- * 10/17/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
 @Tags(
         @Tag(name = "Users")
 )
@@ -49,6 +43,9 @@ public interface UsersApi {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/register")
     UserDto register(@RequestBody @Valid NewUserDto newUser);
+
+    @GetMapping("/confirm/{confirm-code}")
+    UserDto getConfirmation(@PathVariable("confirm-code") String confirmCode);
 
     @GetMapping("/profile")
     UserDto getProfile(@Parameter(hidden = true) @AuthenticationPrincipal AuthenticatedUser user);

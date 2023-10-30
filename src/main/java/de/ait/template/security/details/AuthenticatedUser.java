@@ -8,12 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-/**
- * 10/13/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
 public class AuthenticatedUser implements UserDetails {
 
     private final User user;
@@ -44,7 +38,7 @@ public class AuthenticatedUser implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !user.getState().equals(User.State.BANNED);
     }
 
     @Override
@@ -54,7 +48,7 @@ public class AuthenticatedUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return user.getState().equals(User.State.CONFIRMED);
     }
 
     public Long getId() {

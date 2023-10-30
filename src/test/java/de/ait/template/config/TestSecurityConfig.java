@@ -11,12 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-/**
- * 10/17/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @TestConfiguration
 @Profile("test")
 public class TestSecurityConfig {
@@ -36,12 +31,14 @@ public class TestSecurityConfig {
                             .id(1L)
                             .email(MOCK_USER)
                             .role(User.Role.USER)
+                            .state(User.State.CONFIRMED)
                             .build());
                 } else if (username.equals(MOCK_ADMIN)) {
                     return new AuthenticatedUser(User.builder()
                             .id(1L)
                             .email(MOCK_ADMIN)
                             .role(User.Role.ADMIN)
+                            .state(User.State.CONFIRMED)
                             .build());
                 } else throw new UsernameNotFoundException("User not found");
             }
