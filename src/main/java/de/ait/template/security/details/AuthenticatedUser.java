@@ -8,12 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-/**
- * 10/13/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
 public class AuthenticatedUser implements UserDetails {
 
     private final User user;

@@ -10,12 +10,7 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 10/24/2023
- * OnlineShop
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @Component
 @RequiredArgsConstructor
 public class MailTemplatesUtil {

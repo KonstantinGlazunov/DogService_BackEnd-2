@@ -11,8 +11,8 @@
     <groupId>de.ait</groupId>
     <artifactId>ait-template-project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>OnlineShop</name>
-    <description>OnlineShop</description>
+    <name>DogServices</name>
+    <description>DogServices</description>
 
     <properties>
         <java.version>17</java.version>

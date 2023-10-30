@@ -15,12 +15,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 
 import java.util.Collections;
 
-/**
- * 6/17/2023
- * backend-demo
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 public class OpenApiDocumentation {
     public static Paths buildAuthenticationPath() {
         return new Paths()

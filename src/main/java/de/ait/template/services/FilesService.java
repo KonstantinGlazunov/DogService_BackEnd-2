@@ -16,12 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.InputStream;
 import java.util.UUID;
 
-/**
- * 10/25/2023
- * OnlineShop
- *
- * @author Marsel Sidikov (AIT TR)
- */
 @Service
 @RequiredArgsConstructor
 public class FilesService {

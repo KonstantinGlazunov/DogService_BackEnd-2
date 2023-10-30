@@ -5,12 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-/**
- * 10/23/2023
- * OnlineShop
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @Getter
 @Setter
 @ToString

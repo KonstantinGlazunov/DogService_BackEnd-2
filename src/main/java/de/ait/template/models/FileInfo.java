@@ -6,12 +6,6 @@ import org.hibernate.proxy.HibernateProxy;
 import javax.persistence.*;
 import java.util.Objects;
 
-/**
- * 10/25/2023
- * OnlineShop
- *
- * @author Marsel Sidikov (AIT TR)
- */
 @Getter
 @Setter
 @ToString

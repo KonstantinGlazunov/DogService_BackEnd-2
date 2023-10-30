@@ -7,12 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- * 10/25/2023
- * OnlineShop
- *
- * @author Marsel Sidikov (AIT TR)
- */
 @RequiredArgsConstructor
 @RestController
 public class FilesController implements FilesApi {

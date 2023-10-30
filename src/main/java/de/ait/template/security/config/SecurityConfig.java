@@ -14,12 +14,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static de.ait.template.security.config.SecurityExceptionHandlers.*;
 
-/**
- * 10/13/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true, proxyTargetClass = true)
 public class SecurityConfig {

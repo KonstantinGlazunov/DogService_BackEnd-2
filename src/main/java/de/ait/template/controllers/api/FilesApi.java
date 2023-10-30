@@ -10,12 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- * 10/25/2023
- * OnlineShop
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @Tags(value = @Tag(name = "files"))
 public interface FilesApi {
 

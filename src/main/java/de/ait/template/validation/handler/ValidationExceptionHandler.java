@@ -12,12 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 9/25/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @ControllerAdvice
 public class ValidationExceptionHandler {
 

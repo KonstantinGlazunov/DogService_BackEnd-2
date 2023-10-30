@@ -22,12 +22,7 @@ import java.util.UUID;
 
 import static de.ait.template.dto.UserDto.from;
 
-/**
- * 9/27/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @RequiredArgsConstructor
 @Service
 public class UsersService {

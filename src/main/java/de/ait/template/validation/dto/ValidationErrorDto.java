@@ -6,12 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * 9/25/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -26,13 +26,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
 
-
-/**
- * 10/17/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
 @org.springframework.context.annotation.Configuration
 public class AppConfig {
 

@@ -10,12 +10,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-/**
- * 9/27/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
 @Data
 @Builder
 @AllArgsConstructor

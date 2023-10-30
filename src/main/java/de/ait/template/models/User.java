@@ -7,12 +7,7 @@ import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
-/**
- * 9/27/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @Getter
 @Setter
 @ToString

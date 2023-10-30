@@ -18,12 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/**
- * 9/27/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @SpringBootTest(classes = TestSecurityConfig.class)
 @AutoConfigureMockMvc
 @DisplayName("Endpoint /users is works:")

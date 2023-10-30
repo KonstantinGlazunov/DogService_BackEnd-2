@@ -10,12 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-/**
- * 10/23/2023
- * OnlineShop
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @Component
 @RequiredArgsConstructor
 @Slf4j

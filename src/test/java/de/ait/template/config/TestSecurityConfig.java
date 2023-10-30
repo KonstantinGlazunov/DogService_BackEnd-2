@@ -11,12 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-/**
- * 10/17/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @TestConfiguration
 @Profile("test")
 public class TestSecurityConfig {

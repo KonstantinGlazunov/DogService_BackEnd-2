@@ -9,13 +9,6 @@ import de.ait.template.services.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
-
-/**
- * 9/27/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
 @RequiredArgsConstructor
 @RestController
 public class UsersController implements UsersApi {

@@ -19,12 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-/**
- * 10/17/2023
- * education-center
- *
- * @author Marsel Sidikov (AIT TR)
- */
 @Tags(
         @Tag(name = "Users")
 )
