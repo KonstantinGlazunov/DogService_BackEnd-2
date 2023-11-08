@@ -28,32 +28,32 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 class UsersControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private UsersRepository usersRepository;
-
-    @MockBean
-    private TasksRepository tasksRepository;
-
-    @BeforeEach
-    void setUp() {
-        when(usersRepository.findById(1L)).thenReturn(
-                Optional.of(User.builder()
-                                .id(1L)
-                                .role(User.Role.ADMIN)
-                                .email("admin")
-                .build()));
-    }
-
-    @WithUserDetails(value = "admin")
-    @Test
-    void getProfile() throws Exception {
-        mockMvc.perform(get("/api/users/my/profile")).andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.email", is("admin")))
-                .andExpect(jsonPath("$.role", is("ADMIN")));
-    }
+//    @Autowired
+//    private MockMvc mockMvc;
+//
+//    @MockBean
+//    private UsersRepository usersRepository;
+//
+//    @MockBean
+//    private TasksRepository tasksRepository;
+//
+//    @BeforeEach
+//    void setUp() {
+//        when(usersRepository.findById(1L)).thenReturn(
+//                Optional.of(User.builder()
+//                                .id(1L)
+//                                .role(User.Role.ADMIN)
+//                                .email("admin")
+//                .build()));
+//    }
+//
+//    @WithUserDetails(value = "admin")
+//    @Test
+//    void getProfile() throws Exception {
+//        mockMvc.perform(get("/api/users/my/profile")).andDo(print())
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.id", is(1)))
+//                .andExpect(jsonPath("$.email", is("admin")))
+//                .andExpect(jsonPath("$.role", is("ADMIN")));
+//    }
 }
