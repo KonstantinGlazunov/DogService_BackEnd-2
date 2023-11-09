@@ -40,10 +40,11 @@ public class DogSitterDto {
     @Schema(description = "Почтовый индекс пользователя", example = "35778")
     private String zip;
 
-    @Schema(description = "имя пользователя", example = "username")
+    @Schema(description = "имя пользователя", example = "username") //Может email, а не "имя пользователя" ?
     private String email;
     public static DogSitterDto from(DogSitter dogSitter) {
-        return DogSitterDto.builder()
+        return DogSitterDto.builder() //здесь нужно добавить все поля
+                .city(dogSitter.getCity())
                 .id(dogSitter.getId())
                 .email(dogSitter.getEmail())
                 .build();
