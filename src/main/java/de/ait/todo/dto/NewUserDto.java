@@ -24,7 +24,7 @@ public class NewUserDto {
     @NotBlank
     private String email;
 
-    @Schema(description = "Пароль пользователя", example = "qwerty007")
+    @Schema(description = "Пароль пользователя", example = "qwerty007")  //этот пример пароля не проходит требования к паролю
     @NotBlank
     @Size(min = 7, max = 1000)
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$", message = "Weak password")
