@@ -2,6 +2,7 @@ package de.ait.todo.controllers.api;
 
 import de.ait.todo.dto.DogSitterDto;
 import de.ait.todo.dto.StandardResponseDto;
+import de.ait.todo.models.DogSitter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -37,7 +38,8 @@ public interface DogSittersApi {
     List<DogSitterDto> getDogSitters();
 
 
-    @Operation(summary = "Getting list of Dog sitters by city", description = "Available to all")
+    @Operation(summary = "Getting list of Dog sitters by city and size", description = "Available to all")
     @GetMapping("/search")
-    List<DogSitterDto> getDogSittersByCity(@RequestParam(value = "city", required = false) String city);
+    List<DogSitterDto> getDogSittersByCityAndDogSize(@RequestParam(value = "city", required = false) String city,
+                                                     @RequestParam(value = "dog-size", required = false) DogSitter.DogSize dogSize);
 }

@@ -4,6 +4,7 @@ package de.ait.todo.controllers;
 
 import de.ait.todo.controllers.api.DogSittersApi;
 import de.ait.todo.dto.DogSitterDto;
+import de.ait.todo.models.DogSitter;
 import de.ait.todo.services.DogSittersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,8 +29,8 @@ public class DogSittersController implements DogSittersApi {
     }
 
     @Override
-    public List<DogSitterDto> getDogSittersByCity(String city) {
-        return  dogSittersService.getDogSittersByCity(city);
+    public List<DogSitterDto> getDogSittersByCityAndDogSize(String city, DogSitter.DogSize dogSize) {
+        return  dogSittersService.getDogSittersByCityAndDogSize(city, dogSize);
     }
 
 
