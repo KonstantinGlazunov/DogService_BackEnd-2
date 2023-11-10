@@ -11,8 +11,6 @@ import java.util.Optional;
 
 public interface ClinicsRepository extends JpaRepository<Clinic, Long> {
 
-    Optional<Clinic> findByClinicCity (String clinicCity);
-
     @Query(value = "select clinic from Clinic clinic where clinic.clinicCity = :clinicCity")
     List<Clinic> getClinicsByClinicCity(@Param("clinicCity") String clinicCity);
 
