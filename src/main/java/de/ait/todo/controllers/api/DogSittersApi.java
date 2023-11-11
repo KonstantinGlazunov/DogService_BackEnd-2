@@ -38,8 +38,15 @@ public interface DogSittersApi {
     List<DogSitterDto> getDogSitters();
 
 
-    @Operation(summary = "Getting list of Dog sitters by city and size", description = "Available to all")
+    @Operation(summary = "Getting list of Dog sitters by city or size or zip",
+            description = "Available to all. All parameters are optional. " +
+            "A query without parameters will return all dog sitters. " +
+            "Spaces in ZIP and City are not counted."+
+            " In a ZIP request, only the first three characters apply. For example, 37778 " +
+
+            "will return all sitters whose ZIP starts with 377** .")
     @GetMapping("/search")
     List<DogSitterDto> getDogSittersByCityAndDogSize(@RequestParam(value = "city", required = false) String city,
-                                                     @RequestParam(value = "dog-size", required = false) DogSitter.DogSize dogSize);
+                                                     @RequestParam(value = "dog-size", required = false) DogSitter.DogSize dogSize,
+                                                     @RequestParam(value = "zip", required = false) String zip);
 }

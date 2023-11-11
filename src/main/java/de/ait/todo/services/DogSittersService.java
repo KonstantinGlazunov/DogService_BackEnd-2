@@ -11,6 +11,6 @@ public interface DogSittersService {
 
     List<DogSitterDto> getDogSitters();
 
-    List<DogSitterDto> getDogSittersByCityAndDogSize (String city, DogSitter.DogSize dogSize);
+    List<DogSitterDto> getDogSittersByCityAndDogSize(String city, DogSitter.DogSize dogSize, String zip);
 
 }

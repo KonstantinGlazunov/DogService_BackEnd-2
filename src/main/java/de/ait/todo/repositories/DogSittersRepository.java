@@ -15,10 +15,13 @@ public interface DogSittersRepository extends JpaRepository<DogSitter, Long> {
 
 
     @Query("SELECT dogSitter FROM DogSitter dogSitter " +
-            "WHERE (:city IS NULL OR dogSitter.city = :city)" +
-    "AND (:dogSize IS NULL OR dogSitter.dogSize = :dogSize)")
-    List<DogSitter> findDogSittersByCityAndDogSize(@Param("city") String city,
-                                                    @Param("dogSize")DogSitter.DogSize dogSize);
+            "WHERE (:city IS NULL OR LOWER(dogSitter.city) = TRIM(LOWER(:city)))" +
+    "AND (:dogSize IS NULL OR dogSitter.dogSize = :dogSize)" +
+            "AND (:zip IS NULL OR dogSitter.zip LIKE CONCAT(SUBSTRING(TRIM(:zip),1,3),'%'))")
+    List<DogSitter> findDogSittersByCityAndDogSizeAndZip(@Param("city") String city,
+                                                    @Param("dogSize")DogSitter.DogSize dogSize,
+                                                   @Param("zip")String zip);
 
 
 }
+

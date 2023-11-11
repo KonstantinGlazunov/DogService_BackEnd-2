@@ -1,7 +1,6 @@
 package de.ait.todo.controllers;
 
 
-
 import de.ait.todo.controllers.api.DogSittersApi;
 import de.ait.todo.dto.DogSitterDto;
 import de.ait.todo.models.DogSitter;
@@ -23,14 +22,14 @@ import java.util.List;
 public class DogSittersController implements DogSittersApi {
     private final DogSittersService dogSittersService;
 
-     @Override
-    public List<DogSitterDto> getDogSitters(){
+    @Override
+    public List<DogSitterDto> getDogSitters() {
         return dogSittersService.getDogSitters();
     }
 
     @Override
-    public List<DogSitterDto> getDogSittersByCityAndDogSize(String city, DogSitter.DogSize dogSize) {
-        return  dogSittersService.getDogSittersByCityAndDogSize(city, dogSize);
+    public List<DogSitterDto> getDogSittersByCityAndDogSize(String city, DogSitter.DogSize dogSize, String zip) {
+        return dogSittersService.getDogSittersByCityAndDogSize(city, dogSize, zip);
     }
 
 
