@@ -23,7 +23,7 @@ import java.util.List;
 public class DogSitter {
 
     public enum DogSize {
-        MINI, SMALL, MIDDLE, BIG, GREAT
+        A_MINI, B_SMALL, C_MIDDLE, D_BIG, E_GREAT
     }
 
 
