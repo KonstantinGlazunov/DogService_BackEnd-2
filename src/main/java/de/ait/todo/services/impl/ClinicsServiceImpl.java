@@ -2,6 +2,7 @@ package de.ait.todo.services.impl;
 
 import de.ait.todo.dto.ClinicDto;
 import de.ait.todo.dto.NewClinicDto;
+import de.ait.todo.dto.UpdateClinicDto;
 import de.ait.todo.exceptions.RestException;
 import de.ait.todo.models.Clinic;
 import de.ait.todo.repositories.ClinicsRepository;
@@ -63,6 +64,58 @@ public class ClinicsServiceImpl implements ClinicsService {
          throw new RestException(HttpStatus.NOT_FOUND, "Clinic in <" + clinicCity + "> not found");
         }
         return from(clinics);
+    }
+
+    @Override
+    public ClinicDto updateClinic(Long clinicId, UpdateClinicDto updateClinic) {
+        Clinic clinic = getClinicOrThrow(clinicId);
+
+        clinic.setName(updateClinic.getName());
+
+        if (clinic.getDescription() != null){
+            clinic.setDescription(updateClinic.getDescription());
+        } else {
+            clinic.setDescription(null);
+        }
+
+        if (clinic.getWebSite() != null){
+            clinic.setWebSite(updateClinic.getWebSite());
+        } else {
+            clinic.setWebSite(null);
+        }
+
+        if (clinic.getCountry() != null){
+            clinic.setCountry(updateClinic.getCountry());
+        } else {
+            clinic.setCountry(null);
+        }
+
+        if (clinic.getClinicCity() != null){
+            clinic.setClinicCity(updateClinic.getClinicCity());
+        }  else {
+            clinic.setClinicCity(null);
+        }
+
+        if (clinic.getPostCode() != null){
+            clinic.setPostCode(updateClinic.getPostCode());
+        } else {
+            clinic.setPostCode(null);
+        }
+
+        if (clinic.getAddress() != null){
+            clinic.setAddress(updateClinic.getAddress());
+        } else {
+            clinic.setAddress(null);
+        }
+
+        if (clinic.getTelephoneNumber() != null){
+            clinic.setTelephoneNumber(updateClinic.getTelephoneNumber());
+        } else {
+            clinic.setTelephoneNumber(null);
+        }
+
+        clinicsRepository.save(clinic);
+        return from(clinic);
     }
 
     private Clinic getClinicOrThrow(Long clinicId) {

@@ -84,5 +84,12 @@ public interface KennelsApi {
     KennelDto deleteKennel(@Parameter(description = "kennel ID", example = "1")
                            @PathVariable("kennel-id") Long kennelId);
 
+    @Operation(summary = "Update information about kennel", description = "Manager access")
+    @PutMapping("/{kennel-id}")
+    KennelDto updateKennel(@Parameter(description = "kennel ID", example = "1")
+                           @PathVariable("kennel-id") Long kennelID,
+                           @RequestBody @Valid UpdateKennelDto updateKennel);
+
+
 
 }

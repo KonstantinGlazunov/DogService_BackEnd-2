@@ -4,6 +4,7 @@ import de.ait.todo.controllers.api.KennelsApi;
 import de.ait.todo.dto.ClinicDto;
 import de.ait.todo.dto.KennelDto;
 import de.ait.todo.dto.NewKennelDto;
+import de.ait.todo.dto.UpdateKennelDto;
 import de.ait.todo.services.KennelsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,5 +39,10 @@ public class KennelsController implements KennelsApi {
     @Override
     public KennelDto deleteKennel(Long kennelId) {
         return kennelsService.deleteKennel(kennelId);
+    }
+
+    @Override
+    public KennelDto updateKennel(Long kennelID, UpdateKennelDto updateKennel) {
+        return kennelsService.updateKennel(kennelID,updateKennel);
     }
 }

@@ -3,6 +3,7 @@ package de.ait.todo.services.impl;
 import de.ait.todo.dto.ClinicDto;
 import de.ait.todo.dto.KennelDto;
 import de.ait.todo.dto.NewKennelDto;
+import de.ait.todo.dto.UpdateKennelDto;
 import de.ait.todo.exceptions.RestException;
 import de.ait.todo.models.Clinic;
 import de.ait.todo.models.Kennel;
@@ -63,6 +64,58 @@ public class KennelsServiceImpl implements KennelsService {
     public KennelDto deleteKennel(Long kennelId) {
         Kennel kennel = getKennelOrThrow(kennelId);
         kennelsRepository.deleteById(kennelId);
+        return from(kennel);
+    }
+
+    @Override
+    public KennelDto updateKennel(Long kennelID, UpdateKennelDto updateKennel) {
+        Kennel kennel = getKennelOrThrow(kennelID);
+
+        kennel.setName(updateKennel.getName());
+
+        if(kennel.getDescription() != null){
+            kennel.setDescription(updateKennel.getDescription());
+        } else {
+            kennel.setDescription(null);
+        }
+
+        if(kennel.getWebSite() != null){
+            kennel.setWebSite(updateKennel.getWebSite());
+        } else {
+            kennel.setWebSite(null);
+        }
+
+        if (kennel.getCountry() != null){
+            kennel.setCountry(updateKennel.getCountry());
+        } else {
+            kennel.setCountry(null);
+        }
+
+        if (kennel.getKennelCity() != null){
+            kennel.setKennelCity(updateKennel.getKennelCity());
+        }  else {
+            kennel.setKennelCity(null);
+        }
+
+        if (kennel.getPostCode() != null){
+            kennel.setPostCode(updateKennel.getPostCode());
+        } else {
+            kennel.setPostCode(null);
+        }
+
+        if (kennel.getAddress() != null){
+            kennel.setAddress(updateKennel.getAddress());
+        } else {
+            kennel.setAddress(null);
+        }
+
+        if (kennel.getTelephoneNumber() != null){
+            kennel.setTelephoneNumber(updateKennel.getTelephoneNumber());
+        } else {
+            kennel.setTelephoneNumber(null);
+        }
+
+        kennelsRepository.save(kennel);
         return from(kennel);
     }
 

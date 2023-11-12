@@ -2,6 +2,7 @@ package de.ait.todo.services;
 
 import de.ait.todo.dto.ClinicDto;
 import de.ait.todo.dto.NewClinicDto;
+import de.ait.todo.dto.UpdateClinicDto;
 
 import java.util.List;
 
@@ -19,4 +20,5 @@ public interface ClinicsService {
 
     List<ClinicDto> getClinicsByCity(String clinicCity);
 
+    ClinicDto updateClinic(Long clinicId, UpdateClinicDto updateClinic);
 }
