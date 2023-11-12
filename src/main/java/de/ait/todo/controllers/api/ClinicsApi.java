@@ -3,6 +3,7 @@ package de.ait.todo.controllers.api;
 import de.ait.todo.dto.ClinicDto;
 import de.ait.todo.dto.NewClinicDto;
 import de.ait.todo.dto.StandardResponseDto;
+import de.ait.todo.dto.UpdateClinicDto;
 import de.ait.todo.validation.dto.ValidationErrorsDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -85,5 +86,14 @@ public interface ClinicsApi {
     @DeleteMapping("/{clinic-id}")
     ClinicDto deleteClinic(@Parameter(description = "clinic ID", example = "1")
                            @PathVariable("clinic-id") Long clinicId);
+
+    @Operation(summary = "Update information about clinic", description = "Manager access")
+    @PutMapping("/{clinic-id}")
+    ClinicDto updateClinic(@Parameter(description = "clinic ID", example = "1")
+                           @PathVariable("clinic-id") Long clinicId,
+                           @RequestBody @Valid UpdateClinicDto updateClinic);
+
+
+
 
 }
