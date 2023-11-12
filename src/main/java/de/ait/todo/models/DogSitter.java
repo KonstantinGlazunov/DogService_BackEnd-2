@@ -22,6 +22,11 @@ import java.util.List;
 @Table(name = "dog_sitters")
 public class DogSitter {
 
+    public enum DogSize {
+        A_MINI, B_SMALL, C_MIDDLE, D_BIG, E_GREAT
+    }
+
+
     public enum Role {
         USER, DOGSITTER
     }
@@ -61,5 +66,10 @@ public class DogSitter {
 
     @OneToMany(mappedBy = "user")
     private List<Task> tasks;
+
+
+    @Enumerated(value = EnumType.STRING)
+    private DogSize dogSize;
+
 }
 
