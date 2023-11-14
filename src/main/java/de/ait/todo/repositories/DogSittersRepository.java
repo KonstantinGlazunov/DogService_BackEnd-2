@@ -11,6 +11,8 @@ import java.util.Optional;
 
 public interface DogSittersRepository extends JpaRepository<DogSitter, Long> {
     Optional<DogSitter> findByEmail(String email);
+
+
     boolean existsById(Long id);
 
 
