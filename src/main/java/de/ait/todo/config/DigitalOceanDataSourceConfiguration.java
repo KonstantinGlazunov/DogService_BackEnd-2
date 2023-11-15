@@ -45,8 +45,3 @@ public class DigitalOceanDataSourceConfiguration {
 
 }
 
-DATABASE_HOST                   jdbc:postgresql://localhost:5432/test_db
-DATABASE_NAME                    test_db
-DATABASE_PASSWORD                qwerty007
-DATABASE_PORT					5432
-DATABASE_USERNAME				postgres

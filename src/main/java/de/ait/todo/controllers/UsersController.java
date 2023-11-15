@@ -40,8 +40,10 @@ public class UsersController implements UsersApi {
     }
 
     @Override
-    public ResponseEntity<ProfileDto> getConfirmation(String parameter) {
-        return null;
+    public ResponseEntity<ProfileDto> getConfirmation(String confirmCode) {
+        return ResponseEntity
+                .status(201)
+                .body(usersService.confirm(confirmCode));
     }
 
 

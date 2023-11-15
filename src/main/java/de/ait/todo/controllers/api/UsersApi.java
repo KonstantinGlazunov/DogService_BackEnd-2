@@ -79,5 +79,5 @@ public interface UsersApi {
                                           @AuthenticationPrincipal AuthenticatedUser currentUser);
     @GetMapping("/confirm/{confirm-code}")
 //    String getConfirmation(@PathVariable("confirm-code") String confirmCode);
-    ResponseEntity<ProfileDto> getConfirmation( @PathVariable("confirm-code") String parameter);
+    ResponseEntity<ProfileDto> getConfirmation( @PathVariable("confirm-code") String confirmCode);
 }

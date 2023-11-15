@@ -9,4 +9,6 @@ public interface UsersService {
     ProfileDto getProfile(Long currentUserId);
 
     TasksPage getTasksByUser(Long currentUserId);
+
+    ProfileDto confirm(String confirmCode);
 }

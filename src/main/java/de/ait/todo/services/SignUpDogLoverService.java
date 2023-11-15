@@ -3,8 +3,9 @@ package de.ait.todo.services;
 
 import de.ait.todo.dto.NewDogLoverDto;
 import de.ait.todo.dto.DogLoverDto;
+import de.ait.todo.models.User;
 
 public interface SignUpDogLoverService {
-    DogLoverDto signUp(NewDogLoverDto newUser);
-    void signUpp(NewDogLoverDto newUser);
+    DogLoverDto registerDogLover(NewDogLoverDto newUser);
+    User saveUser(NewDogLoverDto newUser);
 }

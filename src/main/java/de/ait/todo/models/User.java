@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 6/11/2023
@@ -36,7 +37,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String userName;
 
     @Column(nullable = false, unique = true)
@@ -49,6 +49,9 @@ public class User {
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private State state;
+
+    @OneToMany(mappedBy = "user")
+    private Set<ConfirmationCode> codes;
 
 //    @OneToMany(mappedBy = "user")
 //    private List<Task> tasks;

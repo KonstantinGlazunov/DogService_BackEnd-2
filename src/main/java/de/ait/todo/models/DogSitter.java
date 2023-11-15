@@ -26,13 +26,11 @@ public class DogSitter {
         A_MINI, B_SMALL, C_MIDDLE, D_BIG, E_GREAT
     }
 
-
     public enum Role {
         USER, DOGSITTER
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -66,7 +64,6 @@ public class DogSitter {
 
     @OneToMany(mappedBy = "user")
     private List<Task> tasks;
-
 
     @Enumerated(value = EnumType.STRING)
     private DogSize dogSize;
