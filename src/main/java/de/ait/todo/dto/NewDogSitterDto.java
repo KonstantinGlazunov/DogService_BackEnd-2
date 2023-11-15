@@ -44,6 +44,10 @@ public class NewDogSitterDto {
     @NotBlank
     private String email;
 
+    @NotNull
+    @Schema(description = "Размер собаки", example = "Mini")
+    private String size;
+
     @Schema(description = "Пароль пользователя", example = "qwerty007")
     @NotBlank
     @Size(min = 7, max = 1000)

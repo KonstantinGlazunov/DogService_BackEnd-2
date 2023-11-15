@@ -38,6 +38,6 @@ public interface SignUpDogSitter {
     })
 
     @PostMapping
-    ResponseEntity<DogSitterDto> signUp(@RequestBody @Valid NewDogSitterDto newSetter);
+    ResponseEntity<DogSitterDto> RegisterDogSitter(@RequestBody @Valid NewDogSitterDto newSetter);
 
 }

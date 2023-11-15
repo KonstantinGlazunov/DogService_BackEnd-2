@@ -20,9 +20,7 @@ public class DogLover {
     public enum Role {
         USER, DOGLOVER
     }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull

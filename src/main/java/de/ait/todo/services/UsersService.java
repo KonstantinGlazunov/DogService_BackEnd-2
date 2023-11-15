@@ -11,5 +11,8 @@ public interface UsersService {
 
     TasksPage getTasksByUser(Long currentUserId);
 
-     User getByEmailOrThrow(String email);
+    ProfileDto confirm(String confirmCode);
+
+    User getByEmailOrThrow(String email);
+
 }

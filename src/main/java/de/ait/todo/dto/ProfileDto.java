@@ -1,5 +1,6 @@
 package de.ait.todo.dto;
 
+import de.ait.todo.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +22,13 @@ public class ProfileDto {
     private String email;
     private String userName;
     private String role;
+
+    public static ProfileDto from(User user) {
+        return ProfileDto.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .userName(user.getUserName())
+                .role(user.getRole().toString())
+                .build();
+    }
 }

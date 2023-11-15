@@ -44,6 +44,6 @@ public interface SignUpDogLover {
     })
 
     @PostMapping
-    ResponseEntity<DogLoverDto> signUp(@RequestBody @Valid NewDogLoverDto newUser);
+    ResponseEntity<DogLoverDto> registerDogLover(@RequestBody @Valid NewDogLoverDto newUser);
 }
 

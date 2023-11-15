@@ -21,10 +21,10 @@ public class SignUpDogLoverController implements SignUpDogLover {
     private final SignUpDogLoverService signUpDogLoverService;
 
     @Override
-    public ResponseEntity<DogLoverDto> signUp(NewDogLoverDto newUser) {
-        signUpDogLoverService.signUpp(newUser);
+    public ResponseEntity<DogLoverDto> registerDogLover(NewDogLoverDto newUser) {
+
         return ResponseEntity
                 .status(201)
-                .body(signUpDogLoverService.signUp(newUser));
+                .body(signUpDogLoverService.registerDogLover(newUser));
     }
 }

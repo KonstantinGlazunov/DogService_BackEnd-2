@@ -15,10 +15,10 @@ public class SignUpDogSitterController implements SignUpDogSitter {
     private final SignUpSitterService signUpSitterService;
 
     @Override
-    public ResponseEntity<DogSitterDto> signUp(NewDogSitterDto newSetter) {
-        signUpSitterService.signUpp(newSetter);
+    public ResponseEntity<DogSitterDto> RegisterDogSitter(NewDogSitterDto newSetter) {
+
         return ResponseEntity
                 .status(201)
-                .body(signUpSitterService.signUp(newSetter));
+                .body(signUpSitterService.RegisterDogSitter(newSetter));
     }
 }

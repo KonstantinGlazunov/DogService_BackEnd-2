@@ -1,6 +1,7 @@
 package de.ait.todo.config;
 
 import de.ait.todo.dto.StandardResponseDto;
+import freemarker.cache.ClassTemplateLoader;
 import io.swagger.v3.core.converter.AnnotatedType;
 import io.swagger.v3.core.converter.ModelConverters;
 import io.swagger.v3.core.converter.ResolvedSchema;
@@ -48,5 +49,14 @@ public class ConfigurationComponents {
                 .addSecurityItem(buildSecurity())
                 .paths(buildAuthenticationPath())
                 .info(new Info().title("Todo Service API").version("0.1"));
+    }
+
+    @Bean
+    public freemarker.template.Configuration freemarkerConfiguration() {
+        freemarker.template.Configuration configuration = new freemarker.template.Configuration(freemarker.template.Configuration.VERSION_2_3_21);
+        configuration.setDefaultEncoding("UTF-8");
+        configuration.setTemplateLoader(new ClassTemplateLoader(ConfigurationComponents.class, "/mails/"));
+
+        return configuration;
     }
 }
