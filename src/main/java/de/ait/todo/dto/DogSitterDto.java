@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Data
@@ -64,4 +65,6 @@ public class DogSitterDto {
                 .map(DogSitterDto::from)
                 .collect(Collectors.toList());
     }
+
+
 }

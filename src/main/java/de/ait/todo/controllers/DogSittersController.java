@@ -32,5 +32,10 @@ public class DogSittersController implements DogSittersApi {
         return dogSittersService.getDogSittersByCityAndDogSize(city, dogSize, zip);
     }
 
+    @Override
+    public DogSitterDto deleteDogSitter(Long id) {
+        return dogSittersService.deleteDogSitter(id);
+    }
+
 
 }

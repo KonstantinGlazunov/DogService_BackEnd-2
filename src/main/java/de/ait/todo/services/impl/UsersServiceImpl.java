@@ -4,6 +4,7 @@ import de.ait.todo.dto.ProfileDto;
 import de.ait.todo.dto.TasksPage;
 import de.ait.todo.exceptions.RestException;
 import de.ait.todo.models.ConfirmationCode;
+import de.ait.todo.models.DogSitter;
 import de.ait.todo.models.Task;
 import de.ait.todo.models.User;
 import de.ait.todo.repositories.ConfirmationCodesRepository;
@@ -76,6 +77,11 @@ public class UsersServiceImpl implements UsersService {
                 .tasks(from(tasks))
                 .build();
 
+    }
+
+    public User getByEmailOrThrow(String email){
+        return usersRepository.findByEmail(email)
+                .orElseThrow(()-> new RestException(HttpStatus.NOT_FOUND, "User with email <" + email + "> not found"));
     }
 
 }

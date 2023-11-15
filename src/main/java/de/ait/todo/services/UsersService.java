@@ -13,4 +13,6 @@ public interface UsersService {
 
     ProfileDto confirm(String confirmCode);
 
+    User getByEmailOrThrow(String email);
+
 }
