@@ -54,10 +54,6 @@ public class UsersServiceImpl implements UsersService {
         return ProfileDto.from(user);
     }
 
-    @Override
-    public User getByEmailOrThrow(String email) {
-        return null;
-    }
 
     @Override
     public ProfileDto getProfile(Long currentUserId) {
