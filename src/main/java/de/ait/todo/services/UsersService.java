@@ -3,6 +3,7 @@ package de.ait.todo.services;
 
 import de.ait.todo.dto.ProfileDto;
 import de.ait.todo.dto.TasksPage;
+import de.ait.todo.models.User;
 
 public interface UsersService {
 
@@ -11,4 +12,6 @@ public interface UsersService {
     TasksPage getTasksByUser(Long currentUserId);
 
     ProfileDto confirm(String confirmCode);
+
+    User getByEmailOrThrow(String email);
 }

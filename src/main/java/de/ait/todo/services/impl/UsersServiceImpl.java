@@ -55,6 +55,11 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    public User getByEmailOrThrow(String email) {
+        return null;
+    }
+
+    @Override
     public ProfileDto getProfile(Long currentUserId) {
         User user = usersRepository.findById(currentUserId)
                 .orElseThrow(IllegalArgumentException::new);
