@@ -24,17 +24,13 @@ import java.util.List;
         @Tag(name = "Clinics")
 })
 @ApiResponses({
-        @ApiResponse(responseCode = "401",
-                description = "User is not authorized ",
-                content = @Content(mediaType = "application/json",
-                        schema = @Schema(implementation = StandardResponseDto.class))),
         @ApiResponse(responseCode = "403",
                description = "Forbidden", content = @Content(mediaType = "application/json",
                         schema = @Schema(implementation = StandardResponseDto.class)))
 
 })
 public interface ClinicsApi {
-    @Operation(summary = "Create clinic", description = "Manager access")
+    @Operation(summary = "Create clinic", description = "Admin access")
     @ApiResponses({
             @ApiResponse(responseCode = "201",
                     description = "Clinic was successfully created ",
@@ -50,7 +46,15 @@ public interface ClinicsApi {
     @PostMapping
     ClinicDto addClinic(@RequestBody @Valid NewClinicDto newClinic);
 
+
+
     @Operation(summary = "Get clinics list", description = "All users access")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",
+                    description = "Request successfully processed",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ClinicDto.class))),
+    })
     @GetMapping
     List<ClinicDto> getClinics();
 
@@ -69,12 +73,23 @@ public interface ClinicsApi {
     ClinicDto getClinic(@Parameter(description = "clinic ID", example = "1")
                         @PathVariable("clinic-id") Long clinicId);
 
+    @Operation(summary = "Get clinic by city", description = "All users access")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",
+                    description = "Request successfully processed",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ClinicDto.class))),
+            @ApiResponse(responseCode = "404",
+                    description = "Clinic not found ",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = StandardResponseDto.class)))
+    })
     @GetMapping("/byCities")
     List<ClinicDto> getClinicsByCity(@RequestParam("city") String clinicCity);
 
-    @Operation(summary = "Delete clinic", description = "Manager access")
+    @Operation(summary = "Delete clinic", description = "Admin access")
     @ApiResponses({
-            @ApiResponse(responseCode = "200",
+            @ApiResponse(responseCode = "204",
                     description = "Clinic was successfully deleted",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ClinicDto.class))),
@@ -87,7 +102,18 @@ public interface ClinicsApi {
     ClinicDto deleteClinic(@Parameter(description = "clinic ID", example = "1")
                            @PathVariable("clinic-id") Long clinicId);
 
-    @Operation(summary = "Update information about clinic", description = "Manager access")
+    @Operation(summary = "Update information about clinic", description = "Admin access")
+    @ApiResponses({
+            @ApiResponse(responseCode = "202",
+                    description = "Information about clinic was successfully updated ",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ClinicDto.class))),
+            @ApiResponse(responseCode = "400",
+                    description = "Validation error",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ValidationErrorsDto.class)))
+
+    })
     @PutMapping("/{clinic-id}")
     ClinicDto updateClinic(@Parameter(description = "clinic ID", example = "1")
                            @PathVariable("clinic-id") Long clinicId,

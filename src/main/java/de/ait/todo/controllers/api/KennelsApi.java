@@ -21,17 +21,13 @@ import java.util.List;
         @Tag(name = "Kennels")
 })
 @ApiResponses({
-        @ApiResponse(responseCode = "401",
-                description = "User is not authorized ",
-                content = @Content(mediaType = "application/json",
-                        schema = @Schema(implementation = StandardResponseDto.class))),
         @ApiResponse(responseCode = "403",
                 description = "Forbidden", content = @Content(mediaType = "application/json",
                 schema = @Schema(implementation = StandardResponseDto.class)))
 
 })
 public interface KennelsApi {
-    @Operation(summary = "Create kennel", description = "Manager access")
+    @Operation(summary = "Create kennel", description = "Admin access")
     @ApiResponses({
             @ApiResponse(responseCode = "201",
                     description = "Kennel was successfully created ",
@@ -47,7 +43,14 @@ public interface KennelsApi {
     @PostMapping
     KennelDto addKennel(@RequestBody @Valid NewKennelDto newKennel);
 
+
     @Operation(summary = "Get kennels list", description = "All users access")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",
+                    description = "Request successfully processed",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ClinicDto.class))),
+    })
     @GetMapping
     List<KennelDto> getKennels();
 
@@ -66,12 +69,23 @@ public interface KennelsApi {
     KennelDto getKennel(@Parameter(description = "kennel ID", example = "1")
                         @PathVariable("kennel-id") Long kennelId);
 
+    @Operation(summary = "Get kennel by city", description = "All users access")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",
+                    description = "Request successfully processed",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ClinicDto.class))),
+            @ApiResponse(responseCode = "404",
+                    description = "Kennel not found ",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = StandardResponseDto.class)))
+    })
     @GetMapping("/byCities")
     List<KennelDto> getKennelsByCity(@RequestParam("city") String kennelCity);
 
-    @Operation(summary = "Delete kennel", description = "Manager access")
+    @Operation(summary = "Delete kennel", description = "Admin access")
     @ApiResponses({
-            @ApiResponse(responseCode = "200",
+            @ApiResponse(responseCode = "204",
                     description = "Kennel was successfully deleted",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = KennelDto.class))),
@@ -84,7 +98,18 @@ public interface KennelsApi {
     KennelDto deleteKennel(@Parameter(description = "kennel ID", example = "1")
                            @PathVariable("kennel-id") Long kennelId);
 
-    @Operation(summary = "Update information about kennel", description = "Manager access")
+    @Operation(summary = "Update information about kennel", description = "Admin access")
+    @ApiResponses({
+            @ApiResponse(responseCode = "202",
+                    description = "Information about kennel was successfully updated ",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ClinicDto.class))),
+            @ApiResponse(responseCode = "400",
+                    description = "Validation error",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ValidationErrorsDto.class)))
+
+    })
     @PutMapping("/{kennel-id}")
     KennelDto updateKennel(@Parameter(description = "kennel ID", example = "1")
                            @PathVariable("kennel-id") Long kennelID,
