@@ -45,9 +45,7 @@ public interface DogSittersApi {
                     "A query without parameters will return all dog sitters. " +
                     "Spaces in ZIP and City are not counted." +
                     " In a ZIP request, only the first three characters apply. For example, 37778 " +
-                    "will return all sitters whose ZIP starts with 377** ." +
-                    "The \"greater than or equal to\" condition applies to the sizes of possible dogs.  " +
-                    "For example, a C-MIDDLE query returns all sitters with sizes C_MIDDLE, D_BIG, E_GREAT. ")
+                    "will return all sitters whose ZIP starts with 377** .")
     @ApiResponse(responseCode = "200",
             description = "Successfully request",
             content = @Content(mediaType = "application/json",
