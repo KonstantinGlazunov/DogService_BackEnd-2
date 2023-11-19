@@ -44,7 +44,7 @@ public class NewDogLoverDto {
     @NotBlank
     private String email;
 
-    @Schema(description = "Пароль пользователя", example = "qwerty007")
+    @Schema(description = "Пароль пользователя", example = "Qwerty007!")
     @NotBlank
     @Size(min = 7, max = 1000)
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$", message = "Weak password")
