@@ -49,7 +49,7 @@ public interface KennelsApi {
             @ApiResponse(responseCode = "200",
                     description = "Request successfully processed",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ClinicDto.class))),
+                            schema = @Schema(implementation = KennelDto.class))),
     })
     @GetMapping
     List<KennelDto> getKennels();
@@ -74,7 +74,7 @@ public interface KennelsApi {
             @ApiResponse(responseCode = "200",
                     description = "Request successfully processed",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ClinicDto.class))),
+                            schema = @Schema(implementation = KennelDto.class))),
             @ApiResponse(responseCode = "404",
                     description = "Kennel not found ",
                     content = @Content(mediaType = "application/json",
@@ -103,7 +103,7 @@ public interface KennelsApi {
             @ApiResponse(responseCode = "202",
                     description = "Information about kennel was successfully updated ",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ClinicDto.class))),
+                            schema = @Schema(implementation = KennelDto.class))),
             @ApiResponse(responseCode = "400",
                     description = "Validation error",
                     content = @Content(mediaType = "application/json",

@@ -31,23 +31,27 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class TestConfig {
     public static final String MOCK_ADMIN = "admin";
 
-//    @Bean
-//    @Primary
-//    public UserDetailsService userDetailsService() {
-//        return new InMemoryUserDetailsManager() {
-//            @Override
-//            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//                if (username.equals(MOCK_ADMIN)) {
-//                    return new AuthenticatedUser(
-//                            User.builder()
-//                                    .id(1L)
-//                                    .email(MOCK_ADMIN)
-//                                    .role(User.Role.ADMIN)
-//                                    .build()
-//                    );
-//                } else throw new UsernameNotFoundException("Пользователь не найден");
-//            }
-//        };
-//    }
+    @Bean
+    @Primary
+    public UserDetailsService userDetailsService() {
+        return new InMemoryUserDetailsManager() {
+            @Override
+            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+                if (username.equals(MOCK_ADMIN)) {
+                    return new AuthenticatedUser(
+                            User.builder()
+                                    .id(1L)
+                                    .email(MOCK_ADMIN)
+                                    .role(User.Role.ADMIN)
+                                    .userName("Admin")
+                                    .state(User.State.CONFIRMED)
+                                    .hashPassword("$2a$10$YijmlwvWMcfIhT2qQOQ7EeRuMiByNjPtKXa78J7Y8z7XZWJJQTDa.")
+                                    .build()
+                    );
+                } else throw new UsernameNotFoundException("Пользователь не найден");
+            }
+        };
+    }
+
 
 }
