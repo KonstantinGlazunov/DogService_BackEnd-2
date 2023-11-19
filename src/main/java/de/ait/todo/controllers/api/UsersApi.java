@@ -90,16 +90,16 @@ public interface UsersApi {
     List<UserDto> getUsers();
 
 
-    @Operation(summary = "Удаление юзера по ID", description = "Юзер успешно удалён")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200",
-                    description = "Request successfully processed",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserDto.class))),
-    })
-    @DeleteMapping("/{user-id}")
-    UserDto deleteUser(@Parameter(description = "user ID", example = "6")
-                           @PathVariable("user-id") Long userId);
+//    @Operation(summary = "Удаление юзера по ID", description = "Юзер успешно удалён")
+//    @ApiResponses({
+//            @ApiResponse(responseCode = "200",
+//                    description = "Request successfully processed",
+//                    content = @Content(mediaType = "application/json",
+//                            schema = @Schema(implementation = UserDto.class))),
+//    })
+//    @DeleteMapping("/{user-id}")
+//    UserDto deleteUser(@Parameter(description = "user ID", example = "6")
+//                           @PathVariable("user-id") Long userId);
 
 }
 

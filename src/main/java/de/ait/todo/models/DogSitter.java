@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "dog_sitters")
+@Table(name = "dogSitters")
 @EqualsAndHashCode(exclude = "dogLovers")
 public class DogSitter {
 

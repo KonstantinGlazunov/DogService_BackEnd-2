@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "dog_lovers")
+@Table(name = "dogLovers")
 public class DogLover {
     public enum Role {
         USER, DOGLOVER

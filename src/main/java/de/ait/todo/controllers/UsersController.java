@@ -44,10 +44,10 @@ public class UsersController implements UsersApi {
         return usersService.getUsers();
     }
 
-    @Override
-    public UserDto deleteUser(Long userId) {
-        return usersService.deleteUser(userId);
-    }
+//    @Override
+//    public UserDto deleteUser(Long userId) {
+//        return usersService.deleteUser(userId);
+//    }
 
 
 }
