@@ -1,9 +1,6 @@
 package de.ait.todo.controllers.api;
 
-import de.ait.todo.dto.ProfileDto;
-import de.ait.todo.dto.StandardResponseDto;
-import de.ait.todo.dto.TasksPage;
-import de.ait.todo.dto.UserDto;
+import de.ait.todo.dto.*;
 import de.ait.todo.models.User;
 import de.ait.todo.security.details.AuthenticatedUser;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,9 +14,12 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Tags(value = {
         @Tag(name = "Users")
@@ -73,11 +73,33 @@ public interface UsersApi {
                                     schema = @Schema(ref = "StandardResponseDto"))
                     }
             )
-    })
-    @GetMapping("/my/tasks")
-    ResponseEntity<TasksPage> getMyTasks(@Parameter(hidden = true)
-                                          @AuthenticationPrincipal AuthenticatedUser currentUser);
+  })
+
     @GetMapping("/confirm/{confirm-code}")
-//    String getConfirmation(@PathVariable("confirm-code") String confirmCode);
+
     ResponseEntity<ProfileDto> getConfirmation( @PathVariable("confirm-code") String confirmCode);
+
+    @Operation(summary = "Получение списка всех юзеров (DogSitters, DogLovers)", description = "Список юзеров получен")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",
+                    description = "Request successfully processed",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserDto.class))),
+    })
+    @GetMapping("/allUsers")
+    List<UserDto> getUsers();
+
+
+    @Operation(summary = "Удаление юзера по ID", description = "Юзер успешно удалён")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",
+                    description = "Request successfully processed",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserDto.class))),
+    })
+    @DeleteMapping("/{user-id}")
+    UserDto deleteUser(@Parameter(description = "user ID", example = "6")
+                           @PathVariable("user-id") Long userId);
+
 }
+

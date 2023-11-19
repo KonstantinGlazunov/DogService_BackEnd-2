@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
@@ -61,6 +62,12 @@ public class DogSitterDto {
     }
 
     public static List<DogSitterDto> from(List<DogSitter> dogSitters) {
+        return dogSitters.stream()
+                .map(DogSitterDto::from)
+                .collect(Collectors.toList());
+    }
+
+    public static List<DogSitterDto> from(Set<DogSitter> dogSitters) {
         return dogSitters.stream()
                 .map(DogSitterDto::from)
                 .collect(Collectors.toList());

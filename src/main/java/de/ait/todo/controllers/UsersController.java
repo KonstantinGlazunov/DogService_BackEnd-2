@@ -1,6 +1,7 @@
 package de.ait.todo.controllers;
 
 import de.ait.todo.controllers.api.UsersApi;
+import de.ait.todo.dto.ClinicDto;
 import de.ait.todo.dto.ProfileDto;
 import de.ait.todo.dto.TasksPage;
 import de.ait.todo.dto.UserDto;
@@ -11,12 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * 6/13/2023
- * spring-security-demo
- *
- * @author Marsel Sidikov (AIT TR)
- */
+import java.util.List;
+
+
 @RestController
 @RequiredArgsConstructor
 public class UsersController implements UsersApi {
@@ -32,18 +30,23 @@ public class UsersController implements UsersApi {
         return ResponseEntity.ok(profile);
     }
 
-    @PreAuthorize("hasAuthority('USER')")
-    @Override
-    public ResponseEntity<TasksPage> getMyTasks(AuthenticatedUser currentUser) {
-        Long currentUserId = currentUser.getUser().getId();
-        return ResponseEntity.ok(usersService.getTasksByUser(currentUserId));
-    }
 
     @Override
     public ResponseEntity<ProfileDto> getConfirmation(String confirmCode) {
         return ResponseEntity
                 .status(201)
                 .body(usersService.confirm(confirmCode));
+    }
+
+    @Override
+    public List<UserDto> getUsers() {
+
+        return usersService.getUsers();
+    }
+
+    @Override
+    public UserDto deleteUser(Long userId) {
+        return usersService.deleteUser(userId);
     }
 
 

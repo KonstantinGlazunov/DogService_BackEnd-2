@@ -1,28 +1,31 @@
 package de.ait.todo.services.impl;
 
-import de.ait.todo.dto.NewDogLoverDto;
-import de.ait.todo.dto.DogLoverDto;
-import de.ait.todo.dto.NewUserDto;
-import de.ait.todo.dto.UserDto;
+import de.ait.todo.dto.*;
+import de.ait.todo.exceptions.RestException;
 import de.ait.todo.mail.MailTemplatesUtil;
 import de.ait.todo.mail.TemplateProjectMailSender;
 import de.ait.todo.models.ConfirmationCode;
 import de.ait.todo.models.DogLover;
+import de.ait.todo.models.DogSitter;
 import de.ait.todo.models.User;
 import de.ait.todo.repositories.ConfirmationCodesRepository;
 import de.ait.todo.repositories.DogLoverRepository;
+import de.ait.todo.repositories.DogSittersRepository;
 import de.ait.todo.repositories.UsersRepository;
 import de.ait.todo.services.SignUpDogLoverService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import static de.ait.todo.dto.DogLoverDto.from;
-
+import static de.ait.todo.dto.DogSitterDto.from;
 /**
  * 6/12/2023
  * spring-security-demo
@@ -34,6 +37,7 @@ import static de.ait.todo.dto.DogLoverDto.from;
 public class SignUpDogLoverServiceImpl implements SignUpDogLoverService {
 
     private final DogLoverRepository loverRepository;
+    private final DogSittersRepository sittersRepository;
     private final UsersRepository usersRepository;
     private final ConfirmationCodesRepository confirmationCodesRepository;
     private final PasswordEncoder passwordEncoder;
@@ -107,4 +111,38 @@ public class SignUpDogLoverServiceImpl implements SignUpDogLoverService {
         return user;
 
     }
+
+    @Override
+    public List<DogSitterDto> addDogSitterToDogLover(Long dogLoverId, DogSitterToDogLoverDto dogSitterData) {
+
+        DogLover dogLover = loverRepository.findById(dogLoverId).orElseThrow(() ->
+                new RestException(HttpStatus.NOT_FOUND, "Course with id <" + dogLoverId + "> not found"));
+
+        DogSitter dogSitter = sittersRepository.findById(dogSitterData.getDogSitterId()).orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND,
+                       "User with id <" + dogSitterData.getDogSitterId() + "> not found"));
+
+        if (!dogSitter.getDogLovers().add(dogLover)) {
+            throw new RestException(HttpStatus.BAD_REQUEST, "User with id <"
+                    + dogSitter.getId() + "> already in course with id <" + dogLover.getId() + ">");
+        }
+        sittersRepository.save(dogSitter);
+        Set<DogSitter> dogSitterOfDogLover = sittersRepository.findAllByDogLoversContainsOrderById(dogLover);
+
+        return from(dogSitterOfDogLover);
+
+    }
+
+    @Override
+    public List<DogSitterDto> getDogSittersOfDogLover(Long dogLoverId) {
+        DogLover dogLover = getDogLoverOrThrow(dogLoverId);
+        Set<DogSitter> dogSitterOfDogLover = sittersRepository.findAllByDogLoversContainsOrderById(dogLover);
+        return from(dogSitterOfDogLover);
+    }
+
+    private DogLover getDogLoverOrThrow(Long dogLoverId) {
+        return loverRepository.findById(dogLoverId)
+                .orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND, "Course with id <" + dogLoverId + "> not found"));
+    }
+
+
 }

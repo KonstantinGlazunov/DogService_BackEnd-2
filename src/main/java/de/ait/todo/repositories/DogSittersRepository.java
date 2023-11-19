@@ -1,5 +1,6 @@
 package de.ait.todo.repositories;
 
+import de.ait.todo.models.DogLover;
 import de.ait.todo.models.DogSitter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,9 +9,12 @@ import org.springframework.data.repository.query.Param;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface DogSittersRepository extends JpaRepository<DogSitter, Long> {
     Optional<DogSitter> findByEmail(String email);
+
+    Set<DogSitter> findAllByDogLoversContainsOrderById(DogLover dogLover);
 
 
     boolean existsById(Long id);

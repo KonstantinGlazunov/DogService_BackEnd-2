@@ -50,6 +50,7 @@ public class DogLoverDto {
     @Schema(description = "имя пользователя", example = "username")
     private String email;
     public static DogLoverDto from(DogLover dogLover) {
+
         return DogLoverDto.builder()
                 .id(dogLover.getId())
                 .firstName(dogLover.getFirstName())
