@@ -52,6 +52,11 @@ public class DogLoverDto {
     public static DogLoverDto from(DogLover dogLover) {
         return DogLoverDto.builder()
                 .id(dogLover.getId())
+                .firstName(dogLover.getFirstName())
+                .lastName(dogLover.getLastName())
+                .userName(dogLover.getUserName())
+                .city(dogLover.getCity())
+                .zip(dogLover.getZip())
                 .email(dogLover.getEmail())
                 .build();
     }
