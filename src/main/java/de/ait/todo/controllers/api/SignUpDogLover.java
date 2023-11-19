@@ -1,5 +1,7 @@
 package de.ait.todo.controllers.api;
 
+import de.ait.todo.dto.DogSitterDto;
+import de.ait.todo.dto.DogSitterToDogLoverDto;
 import de.ait.todo.dto.NewDogLoverDto;
 import de.ait.todo.dto.DogLoverDto;
 import de.ait.todo.validation.dto.ValidationErrorsDto;
@@ -11,18 +13,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
-/**
- * 6/12/2023
- * spring-security-demo
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @Tags(value = {
         @Tag(name = "Users")
 })
@@ -45,5 +41,40 @@ public interface SignUpDogLover {
 
     @PostMapping
     ResponseEntity<DogLoverDto> registerDogLover(@RequestBody @Valid NewDogLoverDto newUser);
+
+
+    @Operation(summary = "Добавление DogSitter к DogLover")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "DogSitter добавлен",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = DogSitterDto.class))
+                    }
+            ),
+            @ApiResponse(responseCode = "400", description = "Ошибка валидации",
+                    content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorsDto.class))
+                    })
+    })
+    @PostMapping("/{dogLover-id}/dogSitters")
+    ResponseEntity<List<DogSitterDto>> addDogSitterToDogLover(@PathVariable("dogLover-id") Long dogLoverId,
+                                                              @RequestBody DogSitterToDogLoverDto gogSitterData);
+
+    @Operation(summary = "Вывод списка DogSitter связанных с DogLover")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Список получен",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = DogSitterDto.class))
+                    }
+            ),
+            @ApiResponse(responseCode = "400", description = "Ошибка валидации",
+                    content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorsDto.class))
+                    })
+    })
+    @GetMapping("/{dogLover-id}/dogSitters")
+    ResponseEntity<List<DogSitterDto>> getDogSittersOfDogLover(@PathVariable("dogLover-id") Long dogLoverId);
+
 }
 

@@ -1,15 +1,12 @@
 package de.ait.todo.services.impl;
 
+import de.ait.todo.dto.ClinicDto;
 import de.ait.todo.dto.ProfileDto;
 import de.ait.todo.dto.TasksPage;
+import de.ait.todo.dto.UserDto;
 import de.ait.todo.exceptions.RestException;
-import de.ait.todo.models.ConfirmationCode;
-import de.ait.todo.models.DogSitter;
-import de.ait.todo.models.Task;
-import de.ait.todo.models.User;
-import de.ait.todo.repositories.ConfirmationCodesRepository;
-import de.ait.todo.repositories.TasksRepository;
-import de.ait.todo.repositories.UsersRepository;
+import de.ait.todo.models.*;
+import de.ait.todo.repositories.*;
 import de.ait.todo.services.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,19 +20,18 @@ import static de.ait.todo.dto.TaskDto.from;
 
 import static de.ait.todo.dto.ProfileDto.from;
 
-/**
- * 6/13/2023
- * spring-security-demo
- *
- * @author Marsel Sidikov (AIT TR)
- */
+import static de.ait.todo.dto.UserDto.from;
+
+
 @RequiredArgsConstructor
 @Service
 public class UsersServiceImpl implements UsersService {
 
     private final UsersRepository usersRepository;
     private final ConfirmationCodesRepository confirmationCodesRepository;
-    private final TasksRepository tasksRepository;
+    //private final TasksRepository tasksRepository;
+    private final DogSittersRepository sittersRepository;
+    private final DogLoverRepository loverRepository;
 
     @Override
     @Transactional
@@ -69,19 +65,51 @@ public class UsersServiceImpl implements UsersService {
                 .build();
     }
 
-    @Override
-    public TasksPage getTasksByUser(Long currentUserId) {
-        List<Task> tasks = tasksRepository.findAllByUser_Id(currentUserId);
-
-        return TasksPage.builder()
-                .tasks(from(tasks))
-                .build();
-
-    }
+//    @Override
+//    public TasksPage getTasksByUser(Long currentUserId) {
+//        List<Task> tasks = tasksRepository.findAllByUser_Id(currentUserId);
+//
+//        return TasksPage.builder()
+//                .tasks(from(tasks))
+//                .build();
+//
+//    }
 
     public User getByEmailOrThrow(String email){
         return usersRepository.findByEmail(email)
                 .orElseThrow(()-> new RestException(HttpStatus.NOT_FOUND, "User with email <" + email + "> not found"));
+    }
+
+    @Override
+    public List<UserDto> getUsers() {
+        List<User> users = usersRepository.findAll();
+        return UserDto.from(users);
+    }
+
+    @Override
+    public UserDto deleteUser(Long userId) {
+        User user = getUserOrThrow(userId);
+        DogSitter dogSitter = getDogSitterOrThrow(userId);
+        DogLover dogLover = getDogLoverOrThrow(userId);
+        usersRepository.delete(user);
+        //loverRepository.delete(dogLover);
+        sittersRepository.delete(dogSitter);
+        return UserDto.from(user);
+    }
+
+    private User getUserOrThrow(Long userId) {
+        return usersRepository.findById(userId)
+                .orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND, "Course with id <" + userId + "> not found"));
+    }
+
+    private DogLover getDogLoverOrThrow(Long dogLoverId) {
+        return loverRepository.findById(dogLoverId)
+                .orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND, "Course with id <" + dogLoverId + "> not found"));
+    }
+
+    private DogSitter getDogSitterOrThrow(Long dogSitterId) {
+        return sittersRepository.findById(dogSitterId)
+                .orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND, "Course with id <" + dogSitterId + "> not found"));
     }
 
 }

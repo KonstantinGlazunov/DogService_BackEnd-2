@@ -2,11 +2,14 @@ package de.ait.todo.models;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -14,6 +17,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "dog_sitters")
+@EqualsAndHashCode(exclude = "dogLovers")
 public class DogSitter {
 
     public enum DogSize {
@@ -56,11 +60,38 @@ public class DogSitter {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user")
-    private List<Task> tasks;
+//    @OneToMany(mappedBy = "user")
+//    private List<Task> tasks;
 
     @Enumerated(value = EnumType.STRING)
     private DogSize dogSize;
+
+    @ManyToMany
+    @JoinTable(
+            name = "DogLovers_DogSitters",
+            joinColumns =
+            @JoinColumn(name = "dogSitter_id", nullable = false, referencedColumnName = "id"),
+            inverseJoinColumns =
+            @JoinColumn(name = "dogLover_id", nullable = false, referencedColumnName = "id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"dogSitter_id", "dogLover_id"})
+    )
+    private Set<DogLover> dogLovers;
+
+//    @Override
+//    public final boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null) return false;
+//        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+//        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+//        if (thisEffectiveClass != oEffectiveClass) return false;
+//        DogSitter dogSitter = (DogSitter) o;
+//        return getId() != null && Objects.equals(getId(), dogSitter.getId());
+//    }
+//
+//    @Override
+//    public final int hashCode() {
+//        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+//    }
 
 }
 

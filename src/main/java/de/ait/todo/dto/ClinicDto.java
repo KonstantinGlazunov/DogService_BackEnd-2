@@ -1,6 +1,7 @@
 package de.ait.todo.dto;
 
 import de.ait.todo.models.Clinic;
+import de.ait.todo.models.User;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -65,4 +66,6 @@ public class ClinicDto {
                 .map(ClinicDto::from)
                 .collect(Collectors.toList());
     }
+
+
 }
