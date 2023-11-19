@@ -89,11 +89,11 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public UserDto deleteUser(Long userId) {
         User user = getUserOrThrow(userId);
-        DogSitter dogSitter = getDogSitterOrThrow(userId);
+        //DogSitter dogSitter = getDogSitterOrThrow(userId);
         DogLover dogLover = getDogLoverOrThrow(userId);
         usersRepository.delete(user);
-        //loverRepository.delete(dogLover);
-        sittersRepository.delete(dogSitter);
+        loverRepository.delete(dogLover);
+        //sittersRepository.delete(dogSitter);
         return UserDto.from(user);
     }
 
