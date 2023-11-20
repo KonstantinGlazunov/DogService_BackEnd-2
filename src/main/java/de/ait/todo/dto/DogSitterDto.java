@@ -57,7 +57,7 @@ public class DogSitterDto {
                 .city(dogSitter.getCity())
                 .zip(dogSitter.getZip())
                 .email(dogSitter.getEmail())
-                .dogSize(dogSitter.getDogSize().toString())
+                .dogSize(dogSitter.getDogSize() != null ? dogSitter.getDogSize().toString() : null)
                 .build();
     }
 
