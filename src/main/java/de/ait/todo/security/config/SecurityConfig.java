@@ -20,8 +20,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 6/11/2023
@@ -42,6 +45,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable();
         httpSecurity.headers().frameOptions().disable();
+        httpSecurity.cors(c ->{
+            CorsConfigurationSource cs = request -> {
+                CorsConfiguration cc = new CorsConfiguration();
+                cc.setAllowedOrigins(List.of("*"));
+                cc.setAllowedMethods(List.of("*"));
+                cc.setAllowedHeaders(List.of("*"));
+                return cc;
+            };
+            c.configurationSource(cs);
+        });
 
         httpSecurity
                 .authorizeRequests()
