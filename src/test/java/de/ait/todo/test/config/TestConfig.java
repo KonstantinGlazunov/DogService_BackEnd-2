@@ -15,12 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-/**
- * 6/22/2023
- * backend-demo
- *
- * @author Marsel Sidikov (AIT TR)
- */
+
 @TestConfiguration
 @EnableAutoConfiguration(exclude = {
         DataSourceAutoConfiguration.class,
@@ -30,6 +25,9 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Profile("test")
 public class TestConfig {
     public static final String MOCK_ADMIN = "admin";
+
+    public static final String MOCK_USER = "user";
+
 
     @Bean
     @Primary
@@ -45,9 +43,17 @@ public class TestConfig {
                                     .role(User.Role.ADMIN)
                                     .userName("Admin")
                                     .state(User.State.CONFIRMED)
-                                    .hashPassword("$2a$10$YijmlwvWMcfIhT2qQOQ7EeRuMiByNjPtKXa78J7Y8z7XZWJJQTDa.")
                                     .build()
                     );
+                } else if(username.equals(MOCK_USER)){
+                    return new AuthenticatedUser(User.builder()
+                            .id(1L)
+                            .email(MOCK_USER)
+                            .role(User.Role.USER)
+                            .userName("User")
+                            .state(User.State.CONFIRMED)
+                            .build());
+
                 } else throw new UsernameNotFoundException("Пользователь не найден");
             }
         };

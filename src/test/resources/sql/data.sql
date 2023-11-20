@@ -9,3 +9,17 @@ values ('Pets kennel1', 'Kennel for small and big pets', 'https://kennel-example
 
 insert into kennel(name, description, web_site, country, kennel_city, post_code, address, telephone_number)
 values ('Pets kennel2', 'Kennel for small and big pets', 'https://kennel-example.de', 'Germany', 'Berlin', '01010', 'Biesnitzer Straße 57', '+49 172 444 11 111');
+
+insert into account(email, hash_password, role, state, user_name)
+values ('user@mail.com', 'Qwerty007!', 'DOGLOVER', 'CONFIRMED', 'User');
+
+insert into account(email, hash_password, role, state, user_name)
+values ('user1@mail.com', 'Qwerty007!', 'DOGLOVER', 'CONFIRMED', 'Max');
+
+
+insert into dog_sitters(id, first_name, last_name, email, role, user_name, zip, dog_size, city)
+values (1,'Sitter1', 'Sitter1', 'simple@mail.com', 'DOGSITTER', 'Sitter1', '01010', 'A_MINI', 'Berlin');
+
+insert into dog_sitters(id, first_name, last_name, email, role, user_name, zip, dog_size, city)
+values (2, 'Sitter2', 'Sitter2', 'simple2@mail.com', 'DOGSITTER', 'Sitter2', '01010', 'A_MINI', 'Berlin');
+
