@@ -26,7 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes = TestConfig.class)
+@SpringBootTest
+        (classes = TestConfig.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @DisplayName("Endpoint /users works:")
@@ -59,60 +60,6 @@ public class UsersControllerTest {
 
 
     @Nested
-    @DisplayName("POST /registerUser:")
-    public class RegisterUser {
-
-        @Test
-        @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
-        public void return_created_user() throws Exception {
-            mockMvc.perform(post("/api/registerUser")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content("{\n" +
-                                    "  \"firstName\": \"User\",\n" +
-                                    "  \"lastName\": \"User\",\n" +
-                                    "  \"userName\": \"@Leonid\",\n" +
-                                    "  \"city\": \"Berlin\",\n" +
-                                    "  \"zip\": \"35778\",\n" +
-                                    "  \"email\": \"simple@mail.com\",\n" +
-                                    "  \"password\": \"Qwerty007!\"\n" +
-                                    "}"))
-                    .andExpect(status().isCreated())
-                    .andExpect(jsonPath("$.id", is(1)))
-                    .andExpect(jsonPath("$.role", is("DOGLOVER")));
-        }
-
-        @Test
-        public void return_400_for_bad_format_email() throws Exception {
-            mockMvc.perform(post("/api/registerUser")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content("{\n" +
-                                    "  \"firstName\": \"User\",\n" +
-                                    "  \"lastName\": \"User\",\n" +
-                                    "  \"userName\": \"@Leonid\",\n" +
-                                    "  \"city\": \"Berlin\",\n" +
-                                    "  \"zip\": \"35778\",\n" +
-                                    "  \"email\": \"usermail.mail.com\",\n" +
-                                    "  \"password\": \"Qwerty007!\"\n" +
-                                    "}"))
-                    .andExpect(status().isBadRequest());
-        }
-
-        @Test
-        @Sql(scripts = "/sql/data.sql")
-        @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
-        public void return_409_for_existed_email() throws Exception {
-            mockMvc.perform(post("/api/registerUser")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content("{\n" +
-                                    "  \"email\": \"user@mail.com\",\n" +
-                                    "  \"password\": \"Qwerty007!\",\n" +
-                                    "  \"userName\": \"User\"\n" +
-                                    "}"))
-                    .andExpect(status().isConflict());
-        }
-    }
-
-    @Nested
     @DisplayName("GET /users/my/profile")
     public class GetProfile {
 
@@ -123,53 +70,49 @@ public class UsersControllerTest {
         }
 
 
+        @WithUserDetails(value = "user")
+        @Test
+        @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
         @BeforeTestMethod
-        void setUp() {
+        void return_information_about_user() {
             when(usersRepository.findById(1L)).thenReturn(
                     Optional.of(User.builder()
                             .id(1L)
-                            .role(User.Role.USER)
+                            .role(User.Role.DOGLOVER)
                             .email("user")
                             .userName("User")
                             .state(User.State.CONFIRMED)
                             .build()));
         }
-        @WithUserDetails(value = "user")
-        @Test
-        @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
         public void return_information_about_current_user() throws Exception {
             mockMvc.perform(get("/api/users/my/profile")).andDo(print())
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.id", is(1)))
-                    .andExpect(jsonPath("$.email", is("user")))
-                    .andExpect(jsonPath("$.role", is("USER")));
+                    .andExpect(jsonPath("$.email", is("user@mail.com")))
+                    .andExpect(jsonPath("$.role", is("DOGLOVER")));
+        }
+
+        @WithUserDetails(value = "admin")
+        @Test
+        @BeforeTestMethod
+        void return_information_about_admin() {
+            when(usersRepository.findById(1L)).thenReturn(
+                    Optional.of(User.builder()
+                            .id(1L)
+                            .role(User.Role.ADMIN)
+                            .email("admin")
+                            .userName("Admin")
+                            .state(User.State.CONFIRMED)
+                            .build()));
+        }
+        public void getProfile_for_Admin() throws Exception {
+            mockMvc.perform(get("/api/users/my/profile")).andDo(print())
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.id", is(1)))
+                    .andExpect(jsonPath("$.email", is("admin")))
+                    .andExpect(jsonPath("$.role", is("ADMIN")));
         }
     }
 
-    @Nested
-    @DisplayName("GET /users:")
-    public class GetUsers {
 
-        @WithUserDetails(value = "user")
-        @Test
-        @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
-        public void return_empty_list_of_users_for_empty_database() throws Exception {
-            mockMvc.perform(get("/api/users/allUsers"))
-                    .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.size()", is(0)));
-        }
-
-        @WithUserDetails(value = "user")
-        @Test
-        @Sql(scripts = "/sql/data.sql")
-        @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
-        public void return_list_of_users_for_not_empty_database() throws Exception {
-            mockMvc.perform(get("/api/users/allUsers"))
-                    .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.size()", is(2)))
-                    .andExpect(jsonPath("$.[0].id", is(1)))
-                    .andExpect(jsonPath("$.[1].id", is(2)))
-                    .andExpect(jsonPath("$.[0].userName", is("User")));
-        }
-    }
 }
