@@ -16,7 +16,6 @@ values ('user@mail.com', 'Qwerty007!', 'DOGLOVER', 'CONFIRMED', 'User');
 insert into account(email, hash_password, role, state, user_name)
 values ('user1@mail.com', 'Qwerty007!', 'DOGLOVER', 'CONFIRMED', 'Max');
 
-
 insert into dog_sitters(id, first_name, last_name, email, role, user_name, zip, dog_size, city)
 values (1,'Sitter1', 'Sitter1', 'simple@mail.com', 'DOGSITTER', 'Sitter1', '01010', 'A_MINI', 'Berlin');
 
