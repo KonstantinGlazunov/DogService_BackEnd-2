@@ -50,6 +50,16 @@ class KennelsControllerTest {
                     .andExpect(jsonPath("$.[0].name", is("Pets kennel1")));
         }
 
+        @Test
+        @Sql(scripts = "/sql/data.sql")
+        @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
+        public void return_list_of_kennels_with_params() throws Exception {
+            mockMvc.perform(get("/api/kennels/byCities?city=Berlin"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.size()", is(2)))
+                    .andExpect(jsonPath("$.[0].kennelCity", is("Berlin")));
+        }
+
     }
 
     @Nested

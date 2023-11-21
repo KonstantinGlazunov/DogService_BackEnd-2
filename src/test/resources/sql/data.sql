@@ -22,3 +22,8 @@ values (1,'Sitter1', 'Sitter1', 'simple@mail.com', 'DOGSITTER', 'Sitter1', '0101
 insert into dog_sitters(id, first_name, last_name, email, role, user_name, zip, dog_size, city)
 values (2, 'Sitter2', 'Sitter2', 'simple2@mail.com', 'DOGSITTER', 'Sitter2', '01010', 'A_MINI', 'Berlin');
 
+insert into dog_lovers(id, first_name, last_name, email, role, user_name, zip, city)
+values (1,'DogLover1', 'DogLover1', 'user@mail.com', 'DOGLOVER', 'User', '01010', 'Berlin');
+
+insert into dog_lovers_dog_sitters(dog_sitter_id, dog_lover_id)
+values (1, 1);

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.DirtiesContext;
@@ -13,11 +14,13 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
 
+import static org.hamcrest.Matchers.arrayContaining;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @SpringBootTest()
 @AutoConfigureMockMvc
@@ -51,6 +54,16 @@ class ClinicsControllerTest {
                     .andExpect(jsonPath("$.[1].id", is(2)))
                     .andExpect(jsonPath("$.[0].name", is("Pets clinic1")));
         }
+
+        @Test
+        @Sql(scripts = "/sql/data.sql")
+        @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
+        public void return_list_of_clinics_with_params() throws Exception {
+            mockMvc.perform(get("/api/clinics/byCities?city=Berlin"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.size()", is(2)))
+                    .andExpect(jsonPath("$.[0].clinicCity", is("Berlin")));
+        }
     }
 
     @Nested
@@ -76,6 +89,7 @@ class ClinicsControllerTest {
             mockMvc.perform(get("/api/clinics/3"))
                     .andExpect(status().isNotFound());
         }
+
     }
 
     @Nested

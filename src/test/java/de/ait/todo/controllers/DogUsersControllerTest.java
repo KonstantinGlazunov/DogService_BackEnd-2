@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
@@ -47,8 +48,16 @@ public class DogUsersControllerTest {
                     .andExpect(jsonPath("$.[1].id", is(2)))
                     .andExpect(jsonPath("$.[0].email", is("simple@mail.com")));
         }
-    }
 
+        @Test
+        @Sql(scripts = "/sql/data.sql")
+        @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
+        public void return_list_of_dogSitters_with_params() throws Exception {
+            mockMvc.perform(get("/api/dog-sitters/search?dog-size=A_MINI"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.size()", is(2)));
+        }
+    }
 
     @Nested
     @DisplayName("POST /registerSetter:")
@@ -136,6 +145,19 @@ public class DogUsersControllerTest {
                                     "}"))
                     .andExpect(status().isBadRequest());
         }
+
+        @Test
+        @Sql(scripts = "/sql/data.sql")
+        @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
+        public void return_added_dogSitter_to_dogLover() throws Exception {
+            mockMvc.perform(post("/api/registerUser/1/dogSitters")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content("{\n" +
+                            "  \"dogSitterId\":2\n" +
+                            "}"))
+                    .andExpect(status().isCreated());
+        }
+
     }
 
     @Nested

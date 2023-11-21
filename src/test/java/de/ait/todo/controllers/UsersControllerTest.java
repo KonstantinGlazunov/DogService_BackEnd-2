@@ -112,7 +112,31 @@ public class UsersControllerTest {
                     .andExpect(jsonPath("$.email", is("admin")))
                     .andExpect(jsonPath("$.role", is("ADMIN")));
         }
+
     }
 
+    @Nested
+    @DisplayName("GET /registerUser/{dogLover-id}/dogSitters")
+    public class GetListOfDogSittersAndDogLovers {
+        @WithUserDetails(value = "user")
+        @Test
+        @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
+        @BeforeTestMethod
+        void return_list_of_dogSitters_added_to_dogLovers() {
+            when(usersRepository.findById(1L)).thenReturn(
+                    Optional.of(User.builder()
+                            .id(1L)
+                            .role(User.Role.DOGLOVER)
+                            .email("user")
+                            .userName("User")
+                            .state(User.State.CONFIRMED)
+                            .build()));
+        }
+        public void return_list_of_dogSitters_with_dogLovers() throws Exception {
+            mockMvc.perform(get("/api/registerUser/1/dogSitters"))
+                    .andExpect(status().isOk());
+        }
+
+    }
 
 }
