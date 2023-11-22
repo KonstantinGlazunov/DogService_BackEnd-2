@@ -87,15 +87,22 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public UserDto deleteUser(Long userId) {
-        User user = getUserOrThrow(userId);
-        //DogSitter dogSitter = getDogSitterOrThrow(userId);
-        DogLover dogLover = getDogLoverOrThrow(userId);
+    public UserDto deleteUser(Long id) {
+        User user = getUserOrThrow(id);
+        DogLover dogLover = getDogLoverOrThrow(id);
+        DogSitter dogSitter = getDogSitterOrThrow(id);
         usersRepository.delete(user);
         loverRepository.delete(dogLover);
-        //sittersRepository.delete(dogSitter);
+        sittersRepository.delete(dogSitter);
         return UserDto.from(user);
     }
+
+    @Override
+    public UserDto getUserByID(Long userId) {
+        User user = getUserOrThrow(userId);
+        return UserDto.from(user);
+    }
+
 
     private User getUserOrThrow(Long userId) {
         return usersRepository.findById(userId)

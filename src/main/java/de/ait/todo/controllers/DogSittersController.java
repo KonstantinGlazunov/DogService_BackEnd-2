@@ -28,6 +28,12 @@ public class DogSittersController implements DogSittersApi {
     }
 
     @Override
+    public DogSitterDto getDogSitterById(String id) {
+            Long longId = Long.parseLong(id);
+            return dogSittersService.getDogSitterById(longId);
+    }
+
+    @Override
     public List<DogSitterDto> getDogSittersByCityAndDogSize(String city, DogSitter.DogSize dogSize, String zip) {
         return dogSittersService.getDogSittersByCityAndDogSize(city, dogSize, zip);
     }

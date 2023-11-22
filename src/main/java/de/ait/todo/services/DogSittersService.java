@@ -7,12 +7,15 @@ import de.ait.todo.models.DogSitter;
 import java.util.List;
 
 public interface DogSittersService {
-    DogSitterDto getDogSitter(Long id);
+
 
     List<DogSitterDto> getDogSitters();
+
+    DogSitterDto getDogSitterById (Long id);
 
     List<DogSitterDto> getDogSittersByCityAndDogSize(String city, DogSitter.DogSize dogSize, String zip);
 
     DogSitterDto deleteDogSitter(Long id);
+
 }
 

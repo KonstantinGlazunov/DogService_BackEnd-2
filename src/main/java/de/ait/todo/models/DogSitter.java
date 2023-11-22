@@ -60,9 +60,9 @@ public class DogSitter {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-//    @OneToMany(mappedBy = "user")
+    //    @OneToMany(mappedBy = "user")
 //    private List<Task> tasks;
-
+    @Column()
     @Enumerated(value = EnumType.STRING)
     private DogSize dogSize;
 

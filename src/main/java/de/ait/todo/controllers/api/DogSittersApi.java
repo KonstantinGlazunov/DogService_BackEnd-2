@@ -24,8 +24,7 @@ import java.util.List;
         @ApiResponse(responseCode = "404",
                 description = "Dog sitters not found",
                 content = @Content(mediaType = "application/json",
-                        schema = @Schema(implementation = StandardResponseDto.class))),
-        @ApiResponse(responseCode = "500", description = "Internal server error.")
+                        schema = @Schema(implementation = StandardResponseDto.class)))
 })
 
 @RequestMapping("/api/dog-sitters")
@@ -38,6 +37,16 @@ public interface DogSittersApi {
     @Operation(summary = "Getting list of Dog sitters", description = "Available to all")
     @GetMapping
     List<DogSitterDto> getDogSitters();
+
+
+    @ApiResponse(responseCode = "200",
+            description = "Successfully request",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = DogSitterDto.class))
+    )
+    @Operation(summary = "Getting Dog sitter by id", description = "Available to admin")
+    @GetMapping("/id-search")
+    DogSitterDto getDogSitterById(@RequestParam(value = "id") String id );
 
 
     @Operation(summary = "Getting list of Dog sitters by city or size or zip",
@@ -69,5 +78,10 @@ public interface DogSittersApi {
     })
     @DeleteMapping("/{dog-sitter-id}")
     DogSitterDto deleteDogSitter(@PathVariable("dog-sitter-id") Long id);
+
+
+
+
+
 
 }

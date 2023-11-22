@@ -27,11 +27,13 @@ public class DogSittersServiceImpl implements DogSittersService {
     private final DogSittersRepository dogSittersRepository;
     private final UsersRepository usersRepository;
     private final UsersService usersService;
+
+
     @Override
-    public DogSitterDto getDogSitter(Long id) {
-       DogSitter dogSitter = getDogSitterOrThrow(id);
-            return DogSitterDto.from(dogSitter);
-        }
+    public DogSitterDto getDogSitterById(Long id) {
+        DogSitter dogSitter = getDogSitterOrThrow(id);
+        return DogSitterDto.from(dogSitter);
+    }
 
 
     @Override
@@ -60,6 +62,8 @@ public class DogSittersServiceImpl implements DogSittersService {
         usersRepository.delete(user);
         return DogSitterDto.from(dogSitter);
     }
+
+
 
     private DogSitter getDogSitterOrThrow(Long id){
         return dogSittersRepository.findById(id)
