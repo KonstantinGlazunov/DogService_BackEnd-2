@@ -35,9 +35,18 @@ public class SignUpDogLoverController implements SignUpDogLover {
 
     @Override
     public ResponseEntity<List<DogSitterDto>> addDogSitterToDogLover(@PathVariable("dogLover-id") Long dogLoverId,
-                                                                    @RequestBody DogSitterToDogLoverDto gogSitterData) {
+                                                                     @RequestBody DogSitterToDogLoverDto gogSitterData) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(signUpDogLoverService.addDogSitterToDogLover(dogLoverId, gogSitterData));
+    }
+    @Override
+    public List<DogSitterDto> addDogSittersToDogLover(@PathVariable("loveId") Long dogLoverId, @PathVariable("sitId") Long gogSitterId) {
+
+
+        return signUpDogLoverService.addDogSittersToDogLover(dogLoverId, gogSitterId);
+
+//        return ResponseEntity.status(HttpStatus.CREATED)
+//                .body(signUpDogLoverService.addDogSittersToDogLover(dogLoverId, gogSitterId));
     }
 
     @Override
