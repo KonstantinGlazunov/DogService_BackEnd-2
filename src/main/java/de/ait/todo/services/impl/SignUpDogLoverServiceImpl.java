@@ -133,6 +133,24 @@ public class SignUpDogLoverServiceImpl implements SignUpDogLoverService {
     }
 
     @Override
+    public List<DogSitterDto> addDogSittersToDogLover(Long dogLoverId, Long dogSitterId) {
+        DogLover dogLover = loverRepository.findById(dogLoverId).orElseThrow(() ->
+                new RestException(HttpStatus.NOT_FOUND, "Course with id <" + dogLoverId + "> not found"));
+
+        DogSitter dogSitter = sittersRepository.findById(dogSitterId).orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND,
+                "User with id <" + dogSitterId + "> not found"));
+
+        if (!dogSitter.getDogLovers().add(dogLover)) {
+            throw new RestException(HttpStatus.BAD_REQUEST, "User with id <"
+                    + dogSitter.getId() + "> already in course with id <" + dogLover.getId() + ">");
+        }
+        sittersRepository.save(dogSitter);
+        Set<DogSitter> dogSitterOfDogLover = sittersRepository.findAllByDogLoversContainsOrderById(dogLover);
+
+        return from(dogSitterOfDogLover);
+    }
+
+    @Override
     public List<DogSitterDto> getDogSittersOfDogLover(Long dogLoverId) {
         DogLover dogLover = getDogLoverOrThrow(dogLoverId);
         Set<DogSitter> dogSitterOfDogLover = sittersRepository.findAllByDogLoversContainsOrderById(dogLover);

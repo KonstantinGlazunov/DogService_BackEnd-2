@@ -15,5 +15,7 @@ public interface SignUpDogLoverService {
 
     List<DogSitterDto> addDogSitterToDogLover(Long dogLoverId, DogSitterToDogLoverDto dogSitterData);
 
+    List<DogSitterDto> addDogSittersToDogLover(Long dogLoverId, Long dogSitterId);
+
     List<DogSitterDto> getDogSittersOfDogLover(Long dogLoverId);
 }
