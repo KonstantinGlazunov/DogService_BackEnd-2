@@ -17,7 +17,7 @@ import java.util.List;
  * 6/12/2023
  * spring-security-demo
  *
- * @author Marsel Sidikov (AIT TR)
+ *
  */
 @RequiredArgsConstructor
 @RestController

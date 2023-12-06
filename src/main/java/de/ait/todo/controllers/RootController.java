@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * 6/11/2023
  * backend-demo
  *
- * @author Marsel Sidikov (AIT TR)
+ *
  */
 @Controller
 public class RootController {

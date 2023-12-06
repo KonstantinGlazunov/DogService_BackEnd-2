@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  * 8/8/2023
  * REST API
  *
- * @author Marsel Sidikov (AIT TR)
+ *
  */
 @ControllerAdvice
 public class RestExceptionsHandler {

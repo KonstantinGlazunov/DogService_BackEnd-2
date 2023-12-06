@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * 6/11/2023
  * backend-demo
  *
- * @author Marsel Sidikov (AIT TR)
+ *
  */
 @AllArgsConstructor
 @NoArgsConstructor

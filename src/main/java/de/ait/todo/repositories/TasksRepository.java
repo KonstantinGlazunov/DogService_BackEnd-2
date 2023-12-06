@@ -9,7 +9,7 @@ import java.util.List;
  * 6/11/2023
  * backend-demo
  *
- * @author Marsel Sidikov (AIT TR)
+ *
  */
 public interface TasksRepository extends JpaRepository<Task, Long> {
     List<Task> findAllByUser_Id(Long userId);

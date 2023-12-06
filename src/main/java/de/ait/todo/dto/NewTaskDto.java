@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * 8/22/2023
  * backend-demo
  *
- * @author Marsel Sidikov (AIT TR)
+ *
  */
 @Data
 public class NewTaskDto {

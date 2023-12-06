@@ -12,7 +12,7 @@ import java.util.List;
  * 6/11/2023
  * backend-demo
  *
- * @author Marsel Sidikov (AIT TR)
+ *
  */
 @Data
 @AllArgsConstructor

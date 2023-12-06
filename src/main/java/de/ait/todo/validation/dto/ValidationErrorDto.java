@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * 7/28/2023
  * REST API
  *
- * @author Marsel Sidikov (AIT TR)
+ *
  */
 @Data
 @AllArgsConstructor

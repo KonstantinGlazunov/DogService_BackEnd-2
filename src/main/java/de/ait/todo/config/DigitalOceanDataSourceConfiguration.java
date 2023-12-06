@@ -12,7 +12,7 @@ import javax.sql.DataSource;
  * 7/13/2023
  * backend-demo
  *
- * @author Marsel Sidikov (AIT TR)
+ *
  */
 @Profile("prod")
 @Configuration

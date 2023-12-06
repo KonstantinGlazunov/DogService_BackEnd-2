@@ -11,7 +11,7 @@ import javax.validation.constraints.*;
  * 6/12/2023
  * spring-security-demo
  *
- * @author Marsel Sidikov (AIT TR)
+ *
  */
 @Data
 @AllArgsConstructor

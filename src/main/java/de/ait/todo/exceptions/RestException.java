@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
  * 8/9/2023
  * REST API
  *
- * @author Marsel Sidikov (AIT TR)
+ *
  */
 public class RestException extends RuntimeException {
 

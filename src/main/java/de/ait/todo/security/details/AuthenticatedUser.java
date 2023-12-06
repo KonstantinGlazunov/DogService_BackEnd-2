@@ -14,7 +14,7 @@ import java.util.Collections;
  * 16.06.2022
  * spring-boot-mvc
  *
- * @author Sidikov Marsel (Akvelon)
+ *
  * @version v1.0
  */
 public class AuthenticatedUser implements UserDetails {
