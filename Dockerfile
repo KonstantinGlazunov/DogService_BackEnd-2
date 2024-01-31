@@ -12,4 +12,5 @@ ARG DEPENDENCY=/workspace/app/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
-ENTRYPOINT ["java","-cp","app:app/lib/*", "-Dspring.profiles.active=prod", "de.ait.todo.BackendDemoApplication"]
+#ENTRYPOINT ["java","-cp","app:app/lib/*", "-Dspring.profiles.active=prod", "de.ait.todo.BackendDemoApplication"]
+ENTRYPOINT ["java","-cp","app:app/lib/*", "-Dspring.config.name=application", "de.ait.todo.BackendDemoApplication"]
