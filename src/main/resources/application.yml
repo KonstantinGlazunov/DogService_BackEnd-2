@@ -5,12 +5,10 @@ spring:
       password: ${DB_PASSWORD}
   jpa:
     hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
       ddl-auto: update
     show-sql: true
-    dialect=org:
-      hibernate:
-        dialect:
-          MySQLDialect:
+
   mail:
     host: smtp.gmail.com
     port: 587
