@@ -22,4 +22,4 @@ logging:
   level:
     org:
       hibernate:
-        SQL:DEBUG:
+        SQL: DEBUG
