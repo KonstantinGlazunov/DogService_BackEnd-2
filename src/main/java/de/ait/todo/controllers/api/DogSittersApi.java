@@ -28,7 +28,7 @@ import java.util.List;
         @ApiResponse(responseCode = "500", description = "Internal server error.")
 })
 
-@RequestMapping("/api/dog-sitters")
+@RequestMapping("/back/api/dog-sitters")
 public interface DogSittersApi {
     @ApiResponse(responseCode = "200",
             description = "Successfully request",
