@@ -4,7 +4,6 @@ import de.ait.todo.dto.DogSitterDto;
 import de.ait.todo.dto.StandardResponseDto;
 import de.ait.todo.dto.TaskDto;
 import de.ait.todo.models.DogSitter;
-import de.ait.todo.validation.dto.ValidationErrorsDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,7 +27,7 @@ import java.util.List;
         @ApiResponse(responseCode = "500", description = "Internal server error.")
 })
 
-@RequestMapping("/back/api/dog-sitters")
+@RequestMapping("/api/dog-sitters")
 public interface DogSittersApi {
     @ApiResponse(responseCode = "200",
             description = "Successfully request",
